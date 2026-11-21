@@ -7,12 +7,45 @@
   <style>
     html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #242830; }
     canvas { display: block; }
+    .camera-menu {
+      position: fixed;
+      z-index: 1;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font: 13px system-ui, sans-serif;
+      pointer-events: none;
+    }
+    .camera-menu button {
+      padding: 6px 9px;
+      background: #202630;
+      color: #e1e7ef;
+      border: 1px solid #596678;
+      border-radius: 5px;
+      font: inherit;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+    .camera-menu button[aria-pressed="true"] {
+      background: #bfd9ff;
+      color: #142033;
+      border-color: #bfd9ff;
+    }
   </style>
   <script type="importmap">
     {"imports":{"three":"/three.module.js"}}
   </script>
 </head>
 <body>
+  <nav class="camera-menu" aria-label="Choix de la caméra">
+    <button type="button" data-camera="1" aria-pressed="false">1 · 1re personne</button>
+    <button type="button" data-camera="2" aria-pressed="false">2 · 2e personne</button>
+    <button type="button" data-camera="3" aria-pressed="true">3 · Isométrique</button>
+    <button type="button" data-camera="4" aria-pressed="false">4 · Side-scroller</button>
+  </nav>
   <script type="module" src="/panther.js"></script>
 </body>
 </html>

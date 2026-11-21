@@ -4,6 +4,8 @@ const { join } = require('node:path');
 
 const index = readFileSync(join(__dirname, 'index.html'));
 const scripts = new Map([
+  ['/MarchingCubes.js', readFileSync(join(__dirname, 'node_modules/three/examples/jsm/objects/MarchingCubes.js'))],
+  ['/camera.js', readFileSync(join(__dirname, 'camera.js'))],
   ['/panther.js', readFileSync(join(__dirname, 'panther.js'))],
   ...['three.module.js', 'three.core.js'].map((file) => [
     '/' + file,
