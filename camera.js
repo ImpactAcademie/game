@@ -1,20 +1,18 @@
 import * as THREE from 'three';
 
 export function setupCamera(scene, renderer, subject, update) {
-  const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 100);
-  const offset = new THREE.Vector3(8, 0, 0);
+  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+  const offset = new THREE.Vector3(8, 2, 0);
   const target = new THREE.Vector3();
 
   function resize() {
     const width = Math.max(1, window.innerWidth);
     const height = Math.max(1, window.innerHeight);
     const aspect = width / height;
-    const halfHeight = 3.6 / Math.min(1, aspect);
+    const halfHeight = 3.15 / Math.min(1, aspect);
     const halfWidth = halfHeight * aspect;
-    camera.left = -halfWidth;
-    camera.right = halfWidth;
-    camera.top = halfHeight;
-    camera.bottom = -halfHeight;
+    camera.aspect = aspect;
+    camera.fov = THREE.MathUtils.radToDeg(2 * Math.atan(halfHeight / offset.length()));
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
   }
@@ -28,7 +26,7 @@ export function setupCamera(scene, renderer, subject, update) {
     previousTime = time;
     update(delta);
     subject.getWorldPosition(target);
-    target.y = 1.15;
+    target.y = 1.45;
     camera.position.copy(target).add(offset);
     camera.lookAt(target);
     renderer.render(scene, camera);
